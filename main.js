@@ -299,5 +299,76 @@ addEventListener('resize', ()=>{
     camera.position.z = 15
 })
 
+addEventListener('touchmove', (event )=>{
+  event.clientX = event.touches[0].clientX
+  event.clientY = event.touches[0].clientY
+  const doesIntersect = raycaster.intersectObject(sphere)
+  if(doesIntersect.length > 0) mouse.down = true
+  mouse.x = ((event.clientX - innerWidth /2) / (innerWidth / 2)) * 2-1
+	mouse.y = - ( event.clientY / innerHeight  ) * 2 + 1
 
+  gsap.set(popout,{
+    x:event.clientX ,
+    y:event.clientY 
+  })
+  if(mouse.down){ 
+  event.preventDefault()
+  console.log('turne')
+  const deltaX = event.clientX - mouse.xPrev
+  const deltaY = event.clientY - mouse.yPrev
+  
+  group.rotation.offset.x += deltaY * 0.009
+  group.rotation.offset.y += deltaX * 0.009
+  gsap.to(group.rotation, {
+    y:group.rotation.offset.y,
+    x:group.rotation.offset.x,
+    duration:2
+  })
+  //group.rotation.y += 
+  //group.rotation.x += 
+  mouse.xPrev = event.clientX
+  mouse.yPrev = event.clientY
+  }
+},{passive:false})
+addEventListener('touchend', (event)=>{
+  mouse.down = false 
+})
+function onPointerMove1( event ) {
+  event.clientX = event.touches[0].clientX
+  event.clientY = event.touches[0].clientY
+
+  const doesIntersect = raycaster.intersectObject(sphere)
+  if(doesIntersect.length > 0) mouse.down = true
+  if(mouse.down){
+	// calculate pointer position in normalized device coordinates
+	// (-1 to +1) for both components
+  
+    const offset = CanvasContainer.getBoundingClientRect().top
+    pointer.x = ((event.clientX + 5)/ innerWidth) * 2-1
+	  pointer.y = - ((event.clientY - offset) / innerHeight  ) * 2 + 1
+  
+  gsap.set(popout,{
+    x:event.clientX ,
+    y:event.clientY 
+  }) 
+    event.preventDefault()
+    console.log('turne')
+    const deltaX = event.clientX - mouse.xPrev
+    const deltaY = event.clientY - mouse.yPrev
+    
+    group.rotation.offset.x += deltaY * 0.005
+    group.rotation.offset.y += deltaX * 0.005
+    gsap.to(group.rotation, {
+      y:group.rotation.offset.y,
+      x:group.rotation.offset.x,
+      duration:2
+    })
+    //group.rotation.y += 
+    //group.rotation.x += 
+    mouse.xPrev = event.clientX
+    mouse.yPrev = event.clientY
+    }
+
+}
+window.addEventListener( 'touchmove', onPointerMove1, {passive:false} )
 

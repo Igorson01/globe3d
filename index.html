@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!--link href="tailwind.css" rel="stylesheet">-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@1,700&family=Lato&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <style> 
+      body{
+        margin: 0;
+        -webkit-font-smoothing:antialiased;
+      }
+      .font-exo {
+        font-family: 'Exo 2', sans-serif;
+      }
+      .font-lato {
+        font-family: 'Lato', sans-serif;
+      }
+      </style>
+  </head>
+  <body>
+    <div id="popout" class="bg-black bg-opacity-75 fixed px-3 py-2 rounded-lg">
+      <h2  class="text-white text-sm">
+      <span id="populationEl"></span>
+      <span>Population</span>
+    </h2>
+      <p id="numberEl" class="text-white font-bold text-lg">10m</p>
+    </div>
+    <div class="xl:flex h-screen bg-black">
+      <div class="xl:w-1/2 flex flex-col justify-center px-8 pt-16 xl:pt-0">
+        <div style="max-width:500px;" class="mx-auto">
+        <h1 class="text-white text-4xl mb-8 font-exo leading-tight"> Interactive Earth</h1>
+        <p style="white-space: pre-line;" class="text-gray-400 mb-8 font-lato" > 
+          This 3D globe showcases every country and its population interactively, offering a fascinating glimpse into our world's demographics</p>
+          <div>
+          <a href="https://en.wikipedia.org/wiki/List_of_sovereign_states" class="text-white bg-green-600 inline-block px-8 py-4 rounded-full font-lato">Learn more</a>
+          </div>
+        </div>
+       </div>
+      <div id="CanvasContainer" class="xl:w-1/2 h-screen">
+      <canvas></canvas>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
